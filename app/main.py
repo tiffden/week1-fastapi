@@ -16,7 +16,8 @@ from pydantic import BaseModel
 # ------------------------------------
 
 # ------------------------------------
-# bash> uvicorn main:app --reload
+# bash> uvicorn main:app --reload --port 8000
+#
 #   main -> main.py
 #   app -> ASGI application object inside the file
 #   --reload  (for development only, not production)
@@ -28,6 +29,15 @@ from pydantic import BaseModel
 # 	    •	Background tasks restart
 # ------------------------------------
 
+# ------------------------------------
+# health:  curl -s http://127.0.0.1:8000/health
+# token:   curl -s -X POST http://127.0.0.1:8000/auth/token \
+#               -H "Content-Type: application/x-www-form-urlencoded" \
+#               -d "username=tee&password=password"
+# /users (authorized):   TOKEN="paste_token_here"
+#                        curl -s http://127.0.0.1:8000/users -H "Authorization: Bearer $TOKEN"
+# /users (unauthorized): curl -i http://127.0.0.1:8000/users (should return 401)
+# ------------------------------------
 
 app = FastAPI(title="Week1 Minimal FastAPI")
 
